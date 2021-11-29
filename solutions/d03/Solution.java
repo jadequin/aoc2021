@@ -1,4 +1,4 @@
-package solutions.d3;
+package solutions.d03;
 
 import java.nio.file.Paths;
 import skeleton.Skeleton;
