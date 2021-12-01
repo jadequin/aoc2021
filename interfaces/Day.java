@@ -11,15 +11,18 @@ public abstract class Day implements IDay {
 
   public Day(int day) {
     this.day = day;
-    this.fileReaderTill = new FileReader(Path.of(String.format("d%02d/input-till", day))); 
-    this.fileReaderLiv = new FileReader(Path.of(String.format("d%02d/input-liv", day))); 
+    this.fileReaderTill = new FileReader(Path.of(String.format("days/d%02d/input-till", day))); 
+    this.fileReaderLiv = new FileReader(Path.of(String.format("days/d%02d/input-liv", day))); 
   }
 
   public void printResult() {
     System.out.printf(
-      "Lösung für Tag %s:\n\tLiv --> %s\n\tTill --> %s\n\n", 
+      "+++ Tag %d +++\n\tPart 1:\n\t\tLiv --> %s\n\t\tTill --> %s\n\tPart 2:\n\t\tLiv --> %s\n\t\tTill --> %s\n\n", 
       day,
-      resultLiv() == null ? "Keine Lösung" : resultLiv(),
-      resultTill() == null ? "Keine Lösung" : resultTill());
+      resultLivPart1() == null ? "Keine Lösung" : resultLivPart1(),
+      resultTillPart1() == null ? "Keine Lösung" : resultTillPart1(),
+      resultLivPart2() == null ? "Keine Lösung" : resultLivPart2(),
+      resultTillPart2() == null ? "Keine Lösung" : resultTillPart2()
+    );
   }
 }
