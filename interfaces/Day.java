@@ -16,13 +16,18 @@ public abstract class Day implements IDay {
   }
 
   public void printResult() {
+    String resLivP1 = resultLivPart1();
+    String resLivP2 = resultLivPart2();
+    String resTillP1 = resultTillPart1();
+    String resTillP2 = resultTillPart2();
+
     System.out.printf(
       "+++ Tag %d +++\n\tPart 1:\n\t\tLiv --> %s\n\t\tTill --> %s\n\tPart 2:\n\t\tLiv --> %s\n\t\tTill --> %s\n\n", 
       day,
-      resultLivPart1() == null ? "Keine Lösung" : resultLivPart1(),
-      resultTillPart1() == null ? "Keine Lösung" : resultTillPart1(),
-      resultLivPart2() == null ? "Keine Lösung" : resultLivPart2(),
-      resultTillPart2() == null ? "Keine Lösung" : resultTillPart2()
+      resLivP1 == null ? "Keine Lösung" : resLivP1,
+      resTillP1 == null ? "Keine Lösung" : resTillP1,
+      resLivP2 == null ? "Keine Lösung" : resLivP2,
+      resTillP2 == null ? "Keine Lösung" : resTillP2
     );
   }
 }
