@@ -34,7 +34,7 @@ public class Day3 extends Day {
 
 
   private static int[] getColumnCount(String[] input) {
-    int[] columnCount = new int[5];
+    int[] columnCount = new int[12];
     
     for(int i = 0; i < input.length; i++) {
       if (input[i] == null) continue; // skip all filtered entries
@@ -85,24 +85,36 @@ public class Day3 extends Day {
       if (rating != null) {
         oxygenRating = rating;
       }
-      if (oxygenRating != null && rating != null) System.out.println("oxyError");
     } 
 
     for (String rating : co2Array) {
       if (rating != null) {
         co2Rating = rating;
       }
-      if (co2Rating != null && rating != null) System.out.println("co2Error");
     }
 
-    System.out.println(co2Rating + " " + oxygenRating);
     return "" + Integer.parseInt(oxygenRating, 2) * Integer.parseInt(co2Rating);
   }
 
   @Override
   public String resultTillPart1() {
-    var input = fileReaderTill.getStringList();
-    return null;
+    String[] input = fileReaderTill.getStringArray();
+    int[] columnCount = getColumnCount(input);
+
+    String gammarate = "";
+    String epsilonrate = "";
+
+    for(int column : columnCount) {
+      if(column > input.length/2){
+        gammarate += "1";
+        epsilonrate += "0";
+      }
+      else{
+        gammarate += "0";
+        epsilonrate += "1";
+      }
+    }
+    return "" + Integer.parseInt(gammarate, 2) * Integer.parseInt(epsilonrate, 2);
   }
 
   @Override
@@ -122,7 +134,6 @@ public class Day3 extends Day {
           .size();
         
         char oxygenBitCriteria = onesOxygen >= Math.ceil(oxygenList.size() / 2.) ? '1' : '0';
-        System.out.println(oxygenBitCriteria);
   
         oxygenList = oxygenList.stream()
           .filter(line -> line.charAt(x) == oxygenBitCriteria)

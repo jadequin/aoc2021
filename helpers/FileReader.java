@@ -21,6 +21,15 @@ public class FileReader {
     }
   }
 
+  public String getString() {
+    try {
+      return Files.readString(path);
+    } catch (IOException e) {
+      System.out.printf("File not found\n\t--> %s", path.toAbsolutePath().toString());
+      return "";
+    }
+  }
+
   public List<Integer> getIntegerList() {
     return getStringList()
       .stream()
