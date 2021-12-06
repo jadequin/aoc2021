@@ -16,13 +16,50 @@ public class Day4 extends Day {
   @Override
   public String resultLivPart1() {
     // TODO Auto-generated method stub
-    return null;
+    String input = fileReaderLiv.getString();
+    
+    int[] numbers = Arrays.stream(input.substring(0, input.indexOf("\r\n")).trim().split(","))
+    .mapToInt(Integer::parseInt)
+    .toArray();
+    
+    Board[] boards = Arrays.stream(input.substring(input.indexOf("\r\n\r\n")).trim().split("\r\n\r\n"))
+    .map(x -> new Board(x))
+    .toArray(Board[]::new);
+    
+    for (var n : numbers)
+      for (var b : boards) {
+        Integer s = b.shot(n);
+        if (s != null)
+          return "" + s;
+          
+        }
+        return null;
   }
   
   @Override
   public String resultLivPart2() {
     // TODO Auto-generated method stub
-    return null;
+    String input = fileReaderLiv.getString();
+    
+    int[] numbers = Arrays.stream(input.substring(0, input.indexOf("\r\n")).trim().split(","))
+    .mapToInt(Integer::parseInt)
+    .toArray();
+    
+    Board[] boards = Arrays.stream(input.substring(input.indexOf("\r\n\r\n")).trim().split("\r\n\r\n"))
+    .map(x -> new Board(x))
+    .toArray(Board[]::new);
+    
+    Integer res = null;
+    for (var n : numbers)
+      for (var b : boards) {
+        if (!b.bingo) {
+          Integer s = b.shot(n);
+          if (s != null)
+            res = s;
+        }
+      }
+
+    return "" + res;
   }
 
   @Override

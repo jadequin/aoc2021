@@ -50,50 +50,44 @@ public class Day3 extends Day {
 
   @Override
   public String resultLivPart2() {
-    // TODO Auto-generated method stub
-    String[] input = fileReaderLiv.getStringArray();
 
-    String[] oxygenArray = Arrays.copyOf(input, input.length);
-    String[] co2Array = Arrays.copyOf(input, input.length);
-    int[] oxygenColumnCount = getColumnCount(oxygenArray);
-    int[] co2ColumnCount = getColumnCount(co2Array);
-    int oxygenCounter = 0;
-    int co2Counter = 0;
+    List<String> input = fileReaderLiv.getStringList();
+    List<String> oxygenList = input.stream().toList();
+    List<String> co2List = input.stream().toList();
 
-    for (int i = 0; i < oxygenColumnCount.length && i < co2ColumnCount.length; i++) {
-      oxygenColumnCount = getColumnCount(oxygenArray);
-      co2ColumnCount = getColumnCount(co2Array);
+    for (int i = 0; i < input.get(0).length(); i++) {
+      int x = i;
 
-      char oxygenBitCriteria = oxygenColumnCount[i] >= input.length/2 ? '1' : '0';
-      char co2BitCriteria = co2ColumnCount[i] <= input.length/2 ? '1' : '0';
-
-      for (int j = 0; j < input.length; j++) {
-        if (input[j].toCharArray()[i] != oxygenBitCriteria && oxygenArray.length - oxygenCounter > 1) {
-          oxygenArray[j] = null;
-          oxygenCounter++;
-        }
-        if (input[j].toCharArray()[i] != co2BitCriteria && co2Array.length - co2Counter > 1) {
-          co2Array[j] = null;
-          co2Counter++;
-        }
+      // Oxygen
+      if (oxygenList.size() > 1) {
+        int onesOxygen = oxygenList.stream()
+          .filter(line -> line.charAt(x) == '1')
+          .toList()
+          .size();
+        
+        char oxygenBitCriteria = onesOxygen >= Math.ceil(oxygenList.size() / 2.) ? '1' : '0';
+  
+        oxygenList = oxygenList.stream()
+          .filter(line -> line.charAt(x) == oxygenBitCriteria)
+          .toList();
       }
+
+      // Co2
+      if (co2List.size() > 1) {
+        int onesCo2 = co2List.stream()
+        .filter(line -> line.toCharArray()[x] == '1')
+        .toList()
+        .size();
+        
+        char co2BitCriteria = onesCo2 >= Math.ceil(co2List.size() / 2.) ? '0' : '1';
+  
+        co2List = co2List.stream()
+          .filter(line -> line.toCharArray()[x] == co2BitCriteria)
+          .toList();
+      }
+
     }
-
-    String oxygenRating = "";
-    String co2Rating = "";
-    for (String rating : oxygenArray) {
-      if (rating != null) {
-        oxygenRating = rating;
-      }
-    } 
-
-    for (String rating : co2Array) {
-      if (rating != null) {
-        co2Rating = rating;
-      }
-    }
-
-    return "" + Integer.parseInt(oxygenRating, 2) * Integer.parseInt(co2Rating);
+    return "" + Integer.parseInt(oxygenList.get(0), 2) * Integer.parseInt(co2List.get(0), 2);
   }
 
   @Override

@@ -10,7 +10,7 @@ public class Main {
     new Day2().printResult();
     new Day3().printResult();
     new Day4().printResult();
-    new Day6().printResult();
+    //new Day6().printResult();
     // usw...
   }
 }
